@@ -161,7 +161,7 @@
 
 <main>
 	<div>
-		<a href="https://adventofcode.com/">Advent of Code</a> Extra Leaderboard (by <a href="https://beta.vero.site/">betaveros</a>, hugely inspired by <a href="http://www.maurits.vdschee.nl/scatterplot/medals.html">mevdschee</a>)
+		<a href="https://adventofcode.com/">Advent of Code</a> Extra Leaderboard (by <a href="https://beta.vero.site/">betaveros</a> / inspirations: <a href="http://www.maurits.vdschee.nl/scatterplot/medals.html">mevdschee</a>, <a href="https://www.reddit.com/r/adventofcode/comments/a9dh93/2018_complete_global_leaderboard/">/u/mebeim</a>, etc.)
 	<div>
 		Year:
 		{#each yearList as year}
