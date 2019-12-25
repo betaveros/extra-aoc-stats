@@ -1,0 +1,9 @@
+body {
+	background-color: #0f0f23;
+	color: white;
+	font-family: "Source Code Pro", "Hasklig";
+}
+
+a:link { color: #0b0; text-decoration: none; }
+a:visited { color: #0a0; text-decoration: none; }
+a:hover { text-decoration: underline; }
