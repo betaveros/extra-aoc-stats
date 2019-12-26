@@ -218,7 +218,7 @@
 		</label>
 
 		<label>
-			<input type=checkbox bind:checked={showMedals}>Show Medals (slower)
+			<input type=checkbox bind:checked={showMedals}>Show All Leaderboards/Medals (slower)
 		</label>
 	</div>
 	<table>
