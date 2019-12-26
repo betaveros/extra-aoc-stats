@@ -206,7 +206,7 @@
 		</label>
 
 		<label>
-			<input type=radio bind:group={sortKey} value={"combinedNegativePenalty"}>Σ min(T,100th)
+			<input type=radio bind:group={sortKey} value={"combinedNegativePenalty"}>Σ min(T,100<sup>th</sup>)
 		</label>
 
 		<label>
