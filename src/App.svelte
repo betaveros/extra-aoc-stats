@@ -136,13 +136,16 @@
 
 	$: scoreList = originalScoreList.slice().sort((a, b) => (b[sortKey] - a[sortKey]));
 
-	let renderedData = { scoreList: [], maxDay: 0, selectedPart: 0, selectedYear };
+	let showMedals = false;
+
+	let renderedData = { scoreList: [], maxDay: 0, selectedPart: 0, selectedYear, showMedals };
 	const updateRenderedData = debounce((data) => { renderedData = data; }, 50);
 	$: updateRenderedData({
 		scoreList,
 		maxDay: processedYearData.maxDay,
 		selectedPart,
 		selectedYear,
+		showMedals,
 	});
 
 	const pad2 = (n) => {
@@ -213,6 +216,10 @@
 		<label>
 			<input type=radio bind:group={sortKey} value={"medalTotalScore"}>Medals (#)
 		</label>
+
+		<label>
+			<input type=checkbox bind:checked={showMedals}>Show Medals (slower)
+		</label>
 	</div>
 	<table>
 		<tr>
@@ -227,9 +234,11 @@
 			<th class="medal"><Medal position={2} /></th>
 			<th class="medal"><Medal position={3} /></th>
 			<th class="medal"><Medal position="#" /></th>
-			{#each oneRange(renderedData.maxDay) as day}
-				<th class="day"><a href="https://adventofcode.com/{renderedData.selectedYear}/{day}">{day}</a></th>
-			{/each}
+			{#if renderedData.showMedals}
+				{#each oneRange(renderedData.maxDay) as day}
+					<th class="day"><a href="https://adventofcode.com/{renderedData.selectedYear}/{day}">{day}</a></th>
+				{/each}
+			{/if}
 		</tr>
 		{#each renderedData.scoreList as scoreInfo, i}
 			<tr>
@@ -260,16 +269,18 @@
 				<td class="medal">{scoreInfo.medalCounts[2]}</td>
 				<td class="medal">{scoreInfo.medalCounts[3]}</td>
 				<td class="medal">{scoreInfo.medalCounts[1] + scoreInfo.medalCounts[2] + scoreInfo.medalCounts[3]}</td>
-				{#each oneRange(renderedData.maxDay) as day}
-					<td class="pos">
-						{#if renderedData.selectedPart !== 2}
-							<Medal position={getPosition(scoreInfo, day, 1)} />
-						{/if}
-						{#if renderedData.selectedPart !== 1}
-							<Medal position={getPosition(scoreInfo, day, 2)} right={renderedData.selectedPart === 0} />
-						{/if}
-					</td>
-				{/each}
+				{#if renderedData.showMedals}
+					{#each oneRange(renderedData.maxDay) as day}
+						<td class="pos">
+							{#if renderedData.selectedPart !== 2}
+								<Medal position={getPosition(scoreInfo, day, 1)} />
+							{/if}
+							{#if renderedData.selectedPart !== 1}
+								<Medal position={getPosition(scoreInfo, day, 2)} right={renderedData.selectedPart === 0} />
+							{/if}
+						</td>
+					{/each}
+				{/if}
 			</tr>
 		{/each}
 	</table>
