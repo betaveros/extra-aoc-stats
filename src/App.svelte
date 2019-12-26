@@ -33,7 +33,7 @@
 		// optimization (faster than forEach) ???
 		const sl = rawData.length;
 		for (let i = 0; i < sl; i++) {
-			const { day, leaderboard } = rawData[i];
+			const { d: day, l: leaderboard } = rawData[i];
 
 			maxDay = Math.max(maxDay, day);
 
@@ -42,8 +42,8 @@
 			for (let j = 0; j < ll; j++) {
 				const entry = leaderboard[j];
 
-				const { name, img, href, supporter, sponsor } = entry.player;
-				const { day, part, position, seconds } = entry;
+				const { n: name, i: img, h: href, s: supporter, p: sponsor } = entry.u;
+				const { p: part, n: position, s: seconds } = entry;
 
 				let info = playerInfos[name] || {
 					performances: {},
