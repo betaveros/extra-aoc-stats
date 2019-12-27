@@ -236,7 +236,7 @@
 			<th class="medal"><Medal position="#" /></th>
 			{#if renderedData.showMedals}
 				{#each oneRange(renderedData.maxDay) as day}
-					<th class="day"><a href="https://adventofcode.com/{renderedData.selectedYear}/{day}">{day}</a></th>
+					<th class="day"><a href="https://adventofcode.com/{renderedData.selectedYear}/leaderboard/day/{day}">{day}</a></th>
 				{/each}
 			{/if}
 		</tr>
