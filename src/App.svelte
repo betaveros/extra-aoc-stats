@@ -327,16 +327,6 @@
 		color: #b00;
 	}
 
-	.christmas tr:nth-child(3n) > :nth-child(3n), .christmas tr:nth-child(3n+1) > :nth-child(3n+2), .christmas tr:nth-child(3n+2) > :nth-child(3n+1) {
-		text-shadow: 0 0 1px #fff, 0 0 3px #fff;
-	}
-	.christmas tr:nth-child(3n) > :nth-child(3n+1), .christmas tr:nth-child(3n+1) > :nth-child(3n), .christmas tr:nth-child(3n+2) > :nth-child(3n+2) {
-		text-shadow: 0 0 1px #cfc, 0 0 3px #cfc;
-	}
-	.christmas tr:nth-child(3n) > :nth-child(3n+2), .christmas tr:nth-child(3n+1) > :nth-child(3n+1), .christmas tr:nth-child(3n+2) > :nth-child(3n) {
-		text-shadow: 0 0 1px #fcc, 0 0 3px #fcc;
-	}
-	
 	img {
 		height: 1em;
 	}
