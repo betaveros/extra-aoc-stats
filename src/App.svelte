@@ -138,7 +138,9 @@
 
 	let showMedals = false;
 
-	let renderedData = { scoreList: [], maxDay: 0, selectedPart: 0, selectedYear, showMedals };
+	let christmasMode = false;
+
+	let renderedData = { scoreList: [], maxDay: 0, selectedPart: 0, selectedYear, showMedals, christmasMode };
 	const updateRenderedData = debounce((data) => { renderedData = data; }, 50);
 	$: updateRenderedData({
 		scoreList,
@@ -146,6 +148,7 @@
 		selectedPart,
 		selectedYear,
 		showMedals,
+		christmasMode,
 	});
 
 	const pad2 = (n) => {
@@ -220,8 +223,12 @@
 		<label>
 			<input type=checkbox bind:checked={showMedals}>Show All Leaderboards/Medals (slower)
 		</label>
+
+		<label>
+			<input type=checkbox bind:checked={christmasMode}>CHRISTMAS MODE
+		</label>
 	</div>
-	<table>
+	<table class={renderedData.christmasMode ? "christmas" : undefined}>
 		<tr>
 			<th>#</th>
 			<th>Score</th>
@@ -251,7 +258,7 @@
 				</td>
 				<td class="name">
 					{#if scoreInfo.href}
-						<a href={scoreInfo.href}>{scoreInfo.name}</a>
+						<a href={scoreInfo.href} class="user">{scoreInfo.name}</a>
 					{:else}
 						{scoreInfo.name}
 					{/if}
@@ -306,6 +313,29 @@
 		border-collapse: collapse;
 	}
 	tr + tr { border-top: 1px solid rgba(255, 255, 255, 0.2); }
+
+	.christmas tr:nth-child(3n) > :nth-child(3n), .christmas tr:nth-child(3n+1) > :nth-child(3n+1), .christmas tr:nth-child(3n+2) > :nth-child(3n+2) {
+		color: #cfc;
+	}
+	.christmas tr:nth-child(3n) > :nth-child(3n+1), .christmas tr:nth-child(3n+1) > :nth-child(3n+2), .christmas tr:nth-child(3n+2) > :nth-child(3n) {
+		color: #fcc;
+	}
+	.christmas tr:nth-child(3n) > :nth-child(3n+1) a.user:link, .christmas tr:nth-child(3n+1) > :nth-child(3n+2) a.user:link, .christmas tr:nth-child(3n+2) > :nth-child(3n) a.user:link {
+		color: #d00;
+	}
+	.christmas tr:nth-child(3n) > :nth-child(3n+1) a.user:visited, .christmas tr:nth-child(3n+1) > :nth-child(3n+2) a.user:visited, .christmas tr:nth-child(3n+2) > :nth-child(3n) a.user:visited {
+		color: #b00;
+	}
+
+	.christmas tr:nth-child(3n) > :nth-child(3n), .christmas tr:nth-child(3n+1) > :nth-child(3n+2), .christmas tr:nth-child(3n+2) > :nth-child(3n+1) {
+		text-shadow: 0 0 1px #fff, 0 0 3px #fff;
+	}
+	.christmas tr:nth-child(3n) > :nth-child(3n+1), .christmas tr:nth-child(3n+1) > :nth-child(3n), .christmas tr:nth-child(3n+2) > :nth-child(3n+2) {
+		text-shadow: 0 0 1px #cfc, 0 0 3px #cfc;
+	}
+	.christmas tr:nth-child(3n) > :nth-child(3n+2), .christmas tr:nth-child(3n+1) > :nth-child(3n+1), .christmas tr:nth-child(3n+2) > :nth-child(3n) {
+		text-shadow: 0 0 1px #fcc, 0 0 3px #fcc;
+	}
 	
 	img {
 		height: 1em;
