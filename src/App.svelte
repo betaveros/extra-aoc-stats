@@ -8,8 +8,9 @@
 	import data2017 from './2017.json';
 	import data2018 from './2018.json';
 	import data2019 from './2019.json';
+	import data2020 from './2020.json';
 
-	const yearList = [2015, 2016, 2017, 2018, 2019];
+	const yearList = [2015, 2016, 2017, 2018, 2019, 2020];
 
 	let yearDataDict = {
 		2015: data2015,
@@ -17,11 +18,13 @@
 		2017: data2017,
 		2018: data2018,
 		2019: data2019,
+		2020: data2020,
 	};
 
-	let selectedYear = 2019;
+	let selectedYear = 2020;
 
 	let omit2018_6 = true;
+	let omit2020_1 = true;
 
 	$: scoreData = yearDataDict[selectedYear];
 
@@ -84,12 +87,12 @@
 
 	let selectedPart = 0;
 
-	const makeUnsortedScoreList = (yearData, selPart, o86) => Object.entries(yearData.playerInfos).map(([name, info]) => {
+	const makeUnsortedScoreList = (yearData, selPart, omits) => Object.entries(yearData.playerInfos).map(([name, info]) => {
 		let score = 0, totalSeconds = 0, count = 0, dnfPenalty = 0;
 		let medalCounts = { 1: 0, 2: 0, 3: 0 };
 
 		for (let day = 1; day <= yearData.maxDay; day++) {
-			if (day === 6 && selectedYear === 2018 && o86) continue;
+			if (omits[`${selectedYear}-${day}`]) continue;
 
 			for (let part = 1; part <= 2; part++) {
 				if (selPart && selPart !== part) continue;
@@ -130,7 +133,10 @@
 		};
 	});
 
-	$: originalScoreList = makeUnsortedScoreList(processedYearData, selectedPart, omit2018_6);
+	$: originalScoreList = makeUnsortedScoreList(processedYearData, selectedPart, {
+		'2018-6': omit2018_6,
+		'2020-1': omit2020_1,
+	});
 
 	let sortKey = "score"; // sort descending by it
 
@@ -180,6 +186,11 @@
 		{#if selectedYear === 2018}
 		<label>
 			<input type=checkbox bind:checked={omit2018_6}>Omit Day 6
+		</label>
+		{/if}
+		{#if selectedYear === 2020}
+		<label>
+			<input type=checkbox bind:checked={omit2020_1}>Omit Day 1
 		</label>
 		{/if}
 	</div>

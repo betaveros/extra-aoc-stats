@@ -61,7 +61,7 @@ def get_day(year, day):
 	with open('{}_day_{}.html'.format(year, day)) as infile:
 		return parse(infile, day)
 
-for year in range(2015, 2020):
+for year in range(2020, 2021):
 	with open('{}.json'.format(year), 'w') as outfile:
 		outfile.write(json.dumps([{
 			'd': i,
