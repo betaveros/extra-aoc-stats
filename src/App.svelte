@@ -9,8 +9,9 @@
 	import data2018 from './2018.json';
 	import data2019 from './2019.json';
 	import data2020 from './2020.json';
+	import data2021 from './2021.json';
 
-	const yearList = [2015, 2016, 2017, 2018, 2019, 2020];
+	const yearList = [2015, 2016, 2017, 2018, 2019, 2020, 2021];
 
 	let yearDataDict = {
 		2015: data2015,
@@ -19,6 +20,7 @@
 		2018: data2018,
 		2019: data2019,
 		2020: data2020,
+		2021: data2021,
 	};
 
 	let selectedYear = 2020;
