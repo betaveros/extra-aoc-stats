@@ -23,7 +23,7 @@
 		2021: data2021,
 	};
 
-	let selectedYear = 2020;
+	let selectedYear = 2021;
 
 	let omit2018_6 = true;
 	let omit2020_1 = true;
